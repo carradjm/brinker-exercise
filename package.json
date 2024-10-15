@@ -6,8 +6,7 @@
     "start": "concurrently \"npm run start -w backend\" \"npm run start -w frontend\"",
     "start:backend": "cd backend && npm run start:dev",
     "start:frontend": "cd frontend && npm start",
-    "test": "concurrently \"cd frontend && npm run test\" \"cd backend && npm run test\"",
-    "test:e2e": "cd backend && npm run test:e2e"
+    "test": "concurrently \"cd frontend && npm run test\" \"cd backend && npm test\""
   },
   "devDependencies": {
     "@types/jest": "^29.5.13",
