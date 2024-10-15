@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from 'src/products/entities/product.entity';
 import { User } from 'src/users/entities/user.entity';
-import * as request from 'supertest';
+import request from 'supertest';
 import { AppModule } from '../src/app.module';
 
 describe('App E2E Tests', () => {
