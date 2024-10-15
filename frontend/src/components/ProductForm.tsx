@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '../AxiosInstance';
 import { ProductContext } from '../context/ProductContext';
 
 interface Product {

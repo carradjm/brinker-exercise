@@ -27,8 +27,9 @@ const Login: React.FC = () => {
         {error && <p className="text-sm text-red-500 text-center">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-1 text-sm font-medium">Username</label>
+            <label id="username" className="block mb-1 text-sm font-medium">Username</label>
             <input
+              aria-labelledby="username"
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -37,8 +38,9 @@ const Login: React.FC = () => {
             />
           </div>
           <div>
-            <label className="block mb-1 text-sm font-medium">Password</label>
+            <label id="password" className="block mb-1 text-sm font-medium">Password</label>
             <input
+              aria-labelledby="password"
               name="password"
               type="password"
               value={password}

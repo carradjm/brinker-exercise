@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '../axiosInstance';
 
 interface Product {
   id: number;

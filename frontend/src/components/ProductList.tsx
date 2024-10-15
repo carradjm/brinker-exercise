@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../AxiosInstance';
 import { ProductContext } from '../context/ProductContext';
-import axiosInstance from '../api/axiosInstance';
 
 interface Product {
   id: number;
