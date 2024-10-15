@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -11,6 +13,8 @@ import { ProductsModule } from './products/products.module';
       synchronize: true, // Automatically syncs entities with the database
     }),
     ProductsModule,
+    AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule { }
