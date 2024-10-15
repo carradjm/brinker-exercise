@@ -14,7 +14,7 @@ const ProductList: React.FC = () => {
     }
   }, [loading, fetchProducts]);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id?: number) => {
     axiosInstance.delete(`http://localhost:3000/products/${id}`)
       .then(() => {
         fetchProducts();
