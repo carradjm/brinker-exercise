@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../api/axiosInstance';
 
 interface Product {
   id?: number;
@@ -20,7 +20,7 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
 
   useEffect(() => {
     if (id) {
-      axios.get<Product>(`http://localhost:3000/products/${id}`)
+      axiosInstance.get<Product>(`http://localhost:3000/products/${id}`)
         .then(response => {
           setProduct(response.data);
           setLoading(false);
@@ -40,7 +40,7 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
     e.preventDefault();
     if (id) {
       // Update product
-      axios.put(`http://localhost:3000/products/${id}`, product)
+      axiosInstance.put(`http://localhost:3000/products/${id}`, product)
         .then(() => {
           navigate('/');
         })
@@ -49,7 +49,7 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
         });
     } else {
       // Create product
-      axios.post('http://localhost:3000/products', product)
+      axiosInstance.post('http://localhost:3000/products', product)
         .then(() => {
           navigate('/');
         })

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { ProductContext } from '../context/ProductContext';
+import axiosInstance from '../api/axiosInstance';
 
 interface Product {
   id: number;
@@ -21,7 +21,7 @@ const ProductList: React.FC = () => {
   }, [loading, fetchProducts]);
 
   const handleDelete = (id: number) => {
-    axios.delete(`http://localhost:3000/products/${id}`)
+    axiosInstance.delete(`http://localhost:3000/products/${id}`)
       .then(() => {
         fetchProducts();
       })

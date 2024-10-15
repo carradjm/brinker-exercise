@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import axios from 'axios';
+import { createContext, useState, useEffect, ReactNode } from 'react';
+import axiosInstance from '../api/axiosInstance';
 
 interface Product {
   id: number;
@@ -25,7 +25,7 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   const fetchProducts = () => {
-    axios
+    axiosInstance
       .get<Product[]>('http://localhost:3000/products')
       .then((response) => {
         setProducts(response.data);
