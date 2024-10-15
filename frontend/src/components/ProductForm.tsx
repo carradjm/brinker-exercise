@@ -3,12 +3,6 @@ import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 import axiosInstance from '../AxiosInstance';
 import { ProductContext } from '../context/ProductContext';
 
-interface Product {
-  id?: number;
-  name: string;
-  price: number;
-}
-
 interface Props {
   readOnly?: boolean;
 }
@@ -51,7 +45,7 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
     if (!product.name) {
       newErrors.name = 'Name is required';
     }
-    if (product.price === undefined || product.price < 0) {
+    if (!product.price || product.price < 0) {
       newErrors.price = 'Price must be a positive number';
     }
 
@@ -98,8 +92,9 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-1 text-sm font-medium">Name</label>
+            <label id="name" className="block mb-1 text-sm font-medium">Name</label>
             <input
+              aria-labelledby="name"
               name="name"
               value={product.name}
               onChange={handleChange}
@@ -112,8 +107,9 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
             )}
           </div>
           <div>
-            <label className="block mb-1 text-sm font-medium">Price</label>
+            <label id="price" className="block mb-1 text-sm font-medium">Price</label>
             <input
+              aria-labelledby="price"
               name="price"
               type="number"
               value={product.price}

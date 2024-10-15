@@ -1,11 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
-import axiosInstance from '../axiosInstance';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
+import axiosInstance from '../AxiosInstance';
 
 interface ProductContextProps {
   products: Product[];

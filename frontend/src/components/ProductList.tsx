@@ -3,12 +3,6 @@ import { Link } from 'react-router-dom';
 import axiosInstance from '../AxiosInstance';
 import { ProductContext } from '../context/ProductContext';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
-
 const ProductList: React.FC = () => {
   const { products, fetchProducts } = useContext(ProductContext);
   const [loading, setLoading] = useState<boolean>(products.length === 0);
