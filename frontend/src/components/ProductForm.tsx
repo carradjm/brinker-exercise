@@ -83,35 +83,65 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
   };
 
   if (loading) {
-    return <p>Loading product...</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-center">Loading product...</p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>{readOnly ? 'View Product' : id ? 'Edit Product' : 'Create Product'}</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            name="name"
-            value={product.name}
-            onChange={handleChange}
-            readOnly={readOnly}
-          />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            name="price"
-            type="number"
-            value={product.price}
-            onChange={handleChange}
-            readOnly={readOnly}
-          />
-        </div>
-        {!readOnly && <button type="submit">{id ? 'Update' : 'Create'}</button>}
-      </form>
-      <button onClick={() => navigate(-1)}>Back</button>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow">
+        <h1 className="text-2xl font-bold text-center">
+          {readOnly ? 'View Product' : id ? 'Edit Product' : 'Create Product'}
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block mb-1 text-sm font-medium">Name</label>
+            <input
+              name="name"
+              value={product.name}
+              onChange={handleChange}
+              readOnly={readOnly}
+              className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 ${readOnly ? 'bg-gray-100' : ''
+                }`}
+            />
+            {errors.name && (
+              <p className="text-sm text-red-500 mt-1">{errors.name}</p>
+            )}
+          </div>
+          <div>
+            <label className="block mb-1 text-sm font-medium">Price</label>
+            <input
+              name="price"
+              type="number"
+              value={product.price}
+              onChange={handleChange}
+              readOnly={readOnly}
+              className={`w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 ${readOnly ? 'bg-gray-100' : ''
+                }`}
+            />
+            {errors.price && (
+              <p className="text-sm text-red-500 mt-1">{errors.price}</p>
+            )}
+          </div>
+          {!readOnly && (
+            <button
+              type="submit"
+              className="w-full px-4 py-2 font-semibold text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              {id ? 'Update' : 'Create'}
+            </button>
+          )}
+        </form>
+        <button
+          onClick={() => navigate(-1)}
+          className="w-full px-4 py-2 font-semibold text-white bg-gray-600 rounded hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        >
+          Back
+        </button>
+      </div>
     </div>
   );
 };
