@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance';
+import { ProductContext } from '../context/ProductContext';
 
 interface Product {
   id?: number;
@@ -16,7 +17,9 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
   const { id } = useParams<{ id: string }>();
   const navigate: NavigateFunction = useNavigate();
   const [product, setProduct] = useState<Product>({ name: '', price: 0 });
+  const { fetchProducts } = useContext(ProductContext);
   const [loading, setLoading] = useState<boolean>(!!id);
+  const [errors, setErrors] = useState<{ name?: string; price?: string }>({});
 
   useEffect(() => {
     if (id) {
@@ -33,15 +36,34 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
   }, [id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: name === 'price' ? parseFloat(value) || 0 : value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const newErrors: { name?: string; price?: string } = {};
+
+    if (!product.name) {
+      newErrors.name = 'Name is required';
+    }
+    if (product.price === undefined || product.price < 0) {
+      newErrors.price = 'Price must be a positive number';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
     if (id) {
       // Update product
       axiosInstance.put(`http://localhost:3000/products/${id}`, product)
         .then(() => {
+          fetchProducts(); // Refresh the products list
           navigate('/');
         })
         .catch(error => {
@@ -51,6 +73,7 @@ const ProductForm: React.FC<Props> = ({ readOnly }) => {
       // Create product
       axiosInstance.post('http://localhost:3000/products', product)
         .then(() => {
+          fetchProducts(); // Refresh the products list
           navigate('/');
         })
         .catch(error => {
