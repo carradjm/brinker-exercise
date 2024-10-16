@@ -4,7 +4,7 @@
 
 ### Backend
 
-1. Navigate to the backend directory:
+1. Navigate to `/backend` from the root directory:
 
     ```bash
     cd backend && yarn install
@@ -18,10 +18,10 @@
 
 ### Frontend
 
-1. Navigate to the frontend directory:
+1. Navigate to `/frontend` from the root directory:
 
     ```bash
-    cd ../frontend && yarn install
+    cd frontend && yarn install
     ```
 
 2. Build the frontend application:
