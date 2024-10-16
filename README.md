@@ -55,7 +55,7 @@ npm run start
     - After registering, navigate to the **Login** page.
     - Enter your newly created credentials to log in.
     - Upon successful login, you can access the list of products.
-    - Products can be created, edit, viewed, and deleted from this page.
+    - Products can be created, edited, viewed, and deleted from this page.
 
 ---
 
